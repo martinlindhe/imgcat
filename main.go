@@ -38,14 +38,14 @@ func (i *fileList) IsCumulative() bool {
 	return true
 }
 
-func ImageList(s kingpin.Settings) (target *[]string) {
+func imageList(s kingpin.Settings) (target *[]string) {
 	target = new([]string)
 	s.SetValue((*fileList)(target))
 	return
 }
 
 var (
-	files   = ImageList(kingpin.Arg("files", "Image files to show."))
+	files   = imageList(kingpin.Arg("files", "Image files to show."))
 	verbose = kingpin.Flag("verbose", "Verbose mode.").Short('v').Bool()
 )
 
