@@ -1,12 +1,52 @@
 package main
 
 import (
+	"fmt"
+	"os"
+
 	"github.com/martinlindhe/imgcat"
+
 	"gopkg.in/alecthomas/kingpin.v2"
 )
 
+type fileList []string
+
+// exists reports whether the named file or directory exists.
+func exists(name string) bool {
+	if _, err := os.Stat(name); err != nil {
+		if os.IsNotExist(err) {
+			return false
+		}
+	}
+	return true
+}
+
+func (i *fileList) Set(value string) error {
+
+	if !exists(value) {
+		return fmt.Errorf("'%s' does not exist", value)
+	}
+	*i = append(*i, value)
+	return nil
+}
+
+func (i *fileList) String() string {
+	return ""
+}
+
+func (i *fileList) IsCumulative() bool {
+	return true
+}
+
+func ImageList(s kingpin.Settings) (target *[]string) {
+	target = new([]string)
+	s.SetValue((*fileList)(target))
+	return
+}
+
 var (
-	file = kingpin.Arg("file", "A image file.").Required().File()
+	files   = ImageList(kingpin.Arg("files", "Image files to show."))
+	verbose = kingpin.Flag("verbose", "Verbose mode.").Short('v').Bool()
 )
 
 func main() {
@@ -14,7 +54,15 @@ func main() {
 	kingpin.CommandLine.HelpFlag.Short('h')
 	kingpin.Parse()
 
-	inFileName := (*file).Name()
+	heading := false
+	if len(*files) > 1 && *verbose {
+		heading = true
+	}
 
-	imgcat.CatImage(inFileName)
+	for _, file := range *files {
+		if heading {
+			fmt.Printf("%s:\n", file)
+		}
+		imgcat.CatImage(file)
+	}
 }
