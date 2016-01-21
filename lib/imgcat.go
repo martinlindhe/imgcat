@@ -30,7 +30,7 @@ func CatFile(fileName string) {
 
 	raw, err := ioutil.ReadFile(fileName)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 
 	embed(raw)
