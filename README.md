@@ -2,8 +2,8 @@
 
 Go port of the iTerm2 imgcat script
 
-https://www.iterm2.com/images.html
-https://raw.githubusercontent.com/gnachman/iTerm2/master/tests/imgcat
+* https://www.iterm2.com/images.html
+* https://raw.githubusercontent.com/gnachman/iTerm2/master/tests/imgcat
 
 NOTE: this requires the use of iTerm 2.9 or later.
 
@@ -24,3 +24,8 @@ func main() {
     imgcat.CatImage("file.jpg")
 }
 ```
+
+
+# License
+
+Under [MIT](LICENSE)
