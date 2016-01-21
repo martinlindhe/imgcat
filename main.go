@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/martinlindhe/imgcat"
+	"github.com/martinlindhe/imgcat/lib"
 
 	"gopkg.in/alecthomas/kingpin.v2"
 )
