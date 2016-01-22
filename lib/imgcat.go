@@ -56,7 +56,6 @@ func embed(data []byte, w io.Writer) {
 	fmt.Fprint(w, "\033Ptmux;\033\033]")
 
 	fmt.Fprint(w, "1337;File=")
-	fmt.Fprintf(w, ";size=%d", len(enc))
 	fmt.Fprint(w, ";inline=1")
 	fmt.Fprint(w, ":")
 	fmt.Fprint(w, enc)
