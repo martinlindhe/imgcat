@@ -1,5 +1,8 @@
 # About
 
+[![GoDoc](https://godoc.org/github.com/martinlindhe/imgcat?status.svg)](https://godoc.org/github.com/martinlindhe/imgcat)
+
+
 Go port of the iTerm2 imgcat script
 
 * https://www.iterm2.com/images.html
