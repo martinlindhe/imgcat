@@ -19,19 +19,19 @@ func Cat(r io.Reader, w io.Writer) error {
 	return embed(r, w)
 }
 
-// CatRGBA embeds given image.RGBA in the terminal output
+// CatRGBA embeds given image.RGBA in the given io.Writer
 func CatRGBA(i *image.RGBA, w io.Writer) error {
 
 	return embed(imageAsPngBytes(i), w)
 }
 
-// CatImage embeds given image.Image in the terminal output
+// CatImage embeds given image.Image in the given io.Writer
 func CatImage(i *image.Image, w io.Writer) error {
 
 	return embed(imageAsPngBytes(*i), w)
 }
 
-// CatFile embeds given image file in the terminal output
+// CatFile embeds image file in the given io.Writer
 func CatFile(fileName string, w io.Writer) error {
 
 	r, err := os.Open(fileName)
