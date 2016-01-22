@@ -25,6 +25,7 @@ func TestCat(t *testing.T) {
 func TestCatFile(t *testing.T) {
 
 	inFile := "file.jpg"
+
 	err := CatFile(inFile, os.Stdout)
 	assert.Equal(t, nil, err)
 }
