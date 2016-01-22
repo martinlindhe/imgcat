@@ -26,14 +26,15 @@ func CatImage(i *image.Image) {
 }
 
 // CatFile embeds given image file in the terminal output (iTerm 2.9+)
-func CatFile(fileName string) {
+func CatFile(fileName string) error {
 
 	raw, err := ioutil.ReadFile(fileName)
 	if err != nil {
-		fmt.Println(err)
+		return err
 	}
 
 	embed(raw)
+	return nil
 }
 
 func embed(data []byte) {
