@@ -21,8 +21,16 @@ package main
 import "github.com/martinlindhe/imgcat/lib"
 
 func main() {
-    imgcat.CatFile("file.jpg")
+    inFile := "file.jpg"
 
+    // using a io.Reader
+	f, _ := os.Open(inFile)
+	CatReader(f, os.Stdout)
+
+    // using filename
+    imgcat.CatFile(inFile)
+
+    // using a image.RGBA
     canvas := image.NewRGBA(image.Rect(0, 0, 20, 20))
     canvas.Set(10, 10, image.NewUniform(color.RGBA{255, 255, 255, 255}))
     imgcat.CatRGBA(canvas)

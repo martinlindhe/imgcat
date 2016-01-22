@@ -55,11 +55,12 @@ func embed(r io.Reader, w io.Writer) error {
 	fmt.Fprintf(w, "1337;File=;inline=1:")
 
 	encoder := base64.NewEncoder(base64.StdEncoding, w)
+	defer encoder.Close()
+
 	_, err := encoder.Write(buf.Bytes())
 	if err != nil {
 		return err
 	}
-	encoder.Close()
 
 	// More of the tmux workaround described above.
 	fmt.Fprintln(w, "\a\033\\")
