@@ -13,32 +13,31 @@ import (
 	"os"
 )
 
-// CatRGBA embeds given image.RGBA in the terminal output
-func CatRGBA(i *image.RGBA) error {
+// Cat embeds given io.Reader in the given io.Writer
+func Cat(r io.Reader, w io.Writer) error {
 
-	return embed(imageAsPngBytes(i), os.Stdout)
+	return embed(r, w)
+}
+
+// CatRGBA embeds given image.RGBA in the terminal output
+func CatRGBA(i *image.RGBA, w io.Writer) error {
+
+	return embed(imageAsPngBytes(i), w)
 }
 
 // CatImage embeds given image.Image in the terminal output
-func CatImage(i *image.Image) error {
+func CatImage(i *image.Image, w io.Writer) error {
 
-	return embed(imageAsPngBytes(*i), os.Stdout)
+	return embed(imageAsPngBytes(*i), w)
 }
 
 // CatFile embeds given image file in the terminal output
-func CatFile(fileName string) error {
+func CatFile(fileName string, w io.Writer) error {
 
 	r, err := os.Open(fileName)
 	if err != nil {
 		return err
 	}
-
-	embed(r, os.Stdout)
-	return nil
-}
-
-// CatReader embeds given io.Reader in the given io.Writer
-func CatReader(r io.Reader, w io.Writer) error {
 
 	return embed(r, w)
 }
@@ -47,8 +46,6 @@ func embed(r io.Reader, w io.Writer) error {
 
 	buf := new(bytes.Buffer)
 	buf.ReadFrom(r)
-
-	fmt.Printf("wrote %d bytes\n", len(buf.Bytes()))
 
 	// tmux requires unrecognized OSC sequences to be wrapped with DCS tmux;
 	// <sequence> ST, and for all ESCs in <sequence> to be replaced with ESC ESC. It

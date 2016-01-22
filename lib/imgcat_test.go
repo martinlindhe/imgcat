@@ -11,10 +11,22 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestCat(t *testing.T) {
+
+	inFile := "file.jpg"
+
+	f, err := os.Open(inFile)
+	assert.Equal(t, nil, err)
+
+	err = Cat(f, os.Stdout)
+	assert.Equal(t, nil, err)
+}
+
 func TestCatFile(t *testing.T) {
 
 	inFile := "file.jpg"
-	CatFile(inFile)
+	err := CatFile(inFile, os.Stdout)
+	assert.Equal(t, nil, err)
 }
 
 func TestCatImage(t *testing.T) {
@@ -24,7 +36,8 @@ func TestCatImage(t *testing.T) {
 	img, err := decodeImage(inFile)
 	assert.Equal(t, nil, err)
 
-	CatImage(&img)
+	err = CatImage(&img, os.Stdout)
+	assert.Equal(t, nil, err)
 }
 
 func TestCatRGBA(t *testing.T) {
@@ -32,17 +45,8 @@ func TestCatRGBA(t *testing.T) {
 	canvas := image.NewRGBA(image.Rect(0, 0, 20, 20))
 	canvas.Set(10, 10, image.NewUniform(color.RGBA{255, 255, 255, 255}))
 
-	CatRGBA(canvas)
-}
-
-func TestCatReader(t *testing.T) {
-
-	inFile := "file.jpg"
-
-	f, err := os.Open(inFile)
+	err := CatRGBA(canvas, os.Stdout)
 	assert.Equal(t, nil, err)
-
-	CatReader(f, os.Stdout)
 }
 
 // returns image.Image, mime-type string, error

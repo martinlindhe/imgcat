@@ -63,7 +63,7 @@ func main() {
 		if heading {
 			fmt.Printf("%s:\n", file)
 		}
-		err := imgcat.CatFile(file)
+		err := imgcat.CatFile(file, os.Stdout)
 		if err != nil {
 			fmt.Println(err)
 		}
