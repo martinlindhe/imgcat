@@ -39,6 +39,14 @@ func CatFile(fileName string) error {
 	return nil
 }
 
+// CatReader embeds given io.Reader in the given io.Writer
+func CatReader(r io.Reader, w io.Writer) {
+
+	buf := new(bytes.Buffer)
+	buf.ReadFrom(r)
+	embed(buf.Bytes(), w)
+}
+
 func embed(data []byte, w io.Writer) {
 	enc := base64.StdEncoding.EncodeToString(data)
 

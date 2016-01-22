@@ -35,6 +35,16 @@ func TestCatRGBA(t *testing.T) {
 	CatRGBA(canvas)
 }
 
+func TestCatReader(t *testing.T) {
+
+	inFile := "file.jpg"
+
+	f, err := os.Open(inFile)
+	assert.Equal(t, nil, err)
+
+	CatReader(f, os.Stdout)
+}
+
 // returns image.Image, mime-type string, error
 func decodeImage(filename string) (image.Image, error) {
 	f, err := os.Open(filename)
