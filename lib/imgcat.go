@@ -1,3 +1,6 @@
+// Package imgcat provides helpers for embedding images (gif, png, jpeg)
+// in the terminal output as suppored by iTerm 2.9+
+// and documented at https://www.iterm2.com/images.html
 package imgcat
 
 import (
@@ -10,19 +13,19 @@ import (
 	"os"
 )
 
-// CatRGBA embeds given image.RGBA in the terminal output (iTerm 2.9+)
+// CatRGBA embeds given image.RGBA in the terminal output
 func CatRGBA(i *image.RGBA) error {
 
 	return embed(imageAsPngBytes(i), os.Stdout)
 }
 
-// CatImage embeds given image.Image in the terminal output (iTerm 2.9+)
+// CatImage embeds given image.Image in the terminal output
 func CatImage(i *image.Image) error {
 
 	return embed(imageAsPngBytes(*i), os.Stdout)
 }
 
-// CatFile embeds given image file in the terminal output (iTerm 2.9+)
+// CatFile embeds given image file in the terminal output
 func CatFile(fileName string) error {
 
 	r, err := os.Open(fileName)
