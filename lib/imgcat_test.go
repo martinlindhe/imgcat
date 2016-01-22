@@ -36,7 +36,7 @@ func TestCatImage(t *testing.T) {
 	img, err := decodeImage(inFile)
 	assert.Equal(t, nil, err)
 
-	err = CatImage(&img, os.Stdout)
+	err = CatImage(img, os.Stdout)
 	assert.Equal(t, nil, err)
 }
 
@@ -45,7 +45,7 @@ func TestCatRGBA(t *testing.T) {
 	canvas := image.NewRGBA(image.Rect(0, 0, 20, 20))
 	canvas.Set(10, 10, image.NewUniform(color.RGBA{255, 255, 255, 255}))
 
-	err := CatRGBA(canvas, os.Stdout)
+	err := CatImage(canvas, os.Stdout)
 	assert.Equal(t, nil, err)
 }
 

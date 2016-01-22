@@ -33,10 +33,10 @@ func main() {
     // using filename
     imgcat.CatFile(inFile, os.Stdout)
 
-    // using a image.RGBA
+    // using a image.Image
     canvas := image.NewRGBA(image.Rect(0, 0, 20, 20))
     canvas.Set(10, 10, image.NewUniform(color.RGBA{255, 255, 255, 255}))
-    imgcat.CatRGBA(canvas, os.Stdout)
+    imgcat.CatImage(canvas, os.Stdout)
 }
 ```
 

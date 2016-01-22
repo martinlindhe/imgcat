@@ -19,20 +19,10 @@ func Cat(r io.Reader, w io.Writer) error {
 	return embed(r, w)
 }
 
-// CatRGBA embeds given image.RGBA in the given io.Writer
-func CatRGBA(i *image.RGBA, w io.Writer) error {
+// CatImage embeds given image.Image in the given io.Writer
+func CatImage(i image.Image, w io.Writer) error {
 
 	b, err := imageAsPngBytes(i)
-	if err != nil {
-		return err
-	}
-	return embed(b, w)
-}
-
-// CatImage embeds given image.Image in the given io.Writer
-func CatImage(i *image.Image, w io.Writer) error {
-
-	b, err := imageAsPngBytes(*i)
 	if err != nil {
 		return err
 	}
