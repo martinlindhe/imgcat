@@ -22,13 +22,21 @@ func Cat(r io.Reader, w io.Writer) error {
 // CatRGBA embeds given image.RGBA in the given io.Writer
 func CatRGBA(i *image.RGBA, w io.Writer) error {
 
-	return embed(imageAsPngBytes(i), w)
+	b, err := imageAsPngBytes(i)
+	if err != nil {
+		return err
+	}
+	return embed(b, w)
 }
 
 // CatImage embeds given image.Image in the given io.Writer
 func CatImage(i *image.Image, w io.Writer) error {
 
-	return embed(imageAsPngBytes(*i), w)
+	b, err := imageAsPngBytes(*i)
+	if err != nil {
+		return err
+	}
+	return embed(b, w)
 }
 
 // CatFile embeds image file in the given io.Writer
@@ -68,12 +76,12 @@ func embed(r io.Reader, w io.Writer) error {
 	return nil
 }
 
-func imageAsPngBytes(i image.Image) io.Reader {
+func imageAsPngBytes(i image.Image) (io.Reader, error) {
 
 	buf := new(bytes.Buffer)
 	err := png.Encode(buf, i)
 	if err != nil {
-		fmt.Println(err)
+		return nil, err
 	}
-	return buf
+	return buf, nil
 }

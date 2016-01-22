@@ -45,11 +45,12 @@ func imageList(s kingpin.Settings) (target *[]string) {
 }
 
 var (
-	files   = imageList(kingpin.Arg("files", "Image files to show."))
+	files   = imageList(kingpin.Arg("files", "Image files to show.").Required())
 	verbose = kingpin.Flag("verbose", "Verbose mode.").Short('v').Bool()
 )
 
 func main() {
+
 	// support -h for --help
 	kingpin.CommandLine.HelpFlag.Short('h')
 	kingpin.Parse()
