@@ -58,9 +58,7 @@ func embed(r io.Reader, w io.Writer) error {
 	// tmux requires unrecognized OSC sequences to be wrapped with DCS tmux;
 	// <sequence> ST, and for all ESCs in <sequence> to be replaced with ESC ESC. It
 	// only accepts ESC backslash for ST.
-	fmt.Fprint(w, "\033Ptmux;\033\033]")
-
-	fmt.Fprintf(w, "1337;File=;inline=1:")
+	fmt.Fprint(w, "\033Ptmux;\033\033]1337;File=;inline=1:")
 
 	encoder := base64.NewEncoder(base64.StdEncoding, w)
 	defer encoder.Close()
@@ -72,7 +70,6 @@ func embed(r io.Reader, w io.Writer) error {
 
 	// More of the tmux workaround described above.
 	fmt.Fprintln(w, "\a\033\\")
-
 	return nil
 }
 
