@@ -52,6 +52,7 @@ func TestCatRGBA(t *testing.T) {
 
 // returns image.Image, mime-type string, error
 func decodeImage(filename string) (image.Image, error) {
+
 	f, err := os.Open(filename)
 	if err != nil {
 		return nil, err

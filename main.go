@@ -5,7 +5,6 @@ import (
 	"os"
 
 	"github.com/martinlindhe/imgcat/lib"
-
 	"gopkg.in/alecthomas/kingpin.v2"
 )
 

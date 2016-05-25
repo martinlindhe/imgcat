@@ -42,6 +42,8 @@ func CatFile(fileName string, w io.Writer) error {
 
 func embed(r io.Reader, w io.Writer) error {
 
+	inScreen := os.Getenv("TERM") == "screen"
+
 	buf := new(bytes.Buffer)
 	_, err := buf.ReadFrom(r)
 	if err != nil {
@@ -51,7 +53,10 @@ func embed(r io.Reader, w io.Writer) error {
 	// tmux requires unrecognized OSC sequences to be wrapped with DCS tmux;
 	// <sequence> ST, and for all ESCs in <sequence> to be replaced with ESC ESC. It
 	// only accepts ESC backslash for ST.
-	fmt.Fprint(w, "\033Ptmux;\033\033]1337;File=;inline=1:")
+	if inScreen {
+		fmt.Fprint(w, "\033Ptmux;\033")
+	}
+	fmt.Fprint(w, "\033]1337;File=;inline=1:")
 
 	encoder := base64.NewEncoder(base64.StdEncoding, w)
 	_, err = encoder.Write(buf.Bytes())
@@ -60,8 +65,10 @@ func embed(r io.Reader, w io.Writer) error {
 	}
 	encoder.Close()
 
-	// More of the tmux workaround described above.
-	fmt.Fprintln(w, "\a\033\\")
+	fmt.Fprintln(w, "\a")
+	if inScreen {
+		fmt.Fprintln(w, "\033\\")
+	}
 	return nil
 }
 
