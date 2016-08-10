@@ -8,7 +8,7 @@ Go port of the iTerm2 imgcat script
 * https://www.iterm2.com/images.html
 * https://raw.githubusercontent.com/gnachman/iTerm2/master/tests/imgcat
 
-NOTE: this requires the use of iTerm 2.9 or later.
+NOTE: requires iTerm2 2.9 or newer.
 
 
 # Install command line
