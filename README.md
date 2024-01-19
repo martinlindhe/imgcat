@@ -13,7 +13,7 @@ NOTE: requires iTerm2 2.9 or newer.
 
 # Install command line
 
-    go get -u github.com/martinlindhe/imgcat
+    go install github.com/martinlindhe/imgcat@latest
 
 
 # Use the lib in your terminal app
