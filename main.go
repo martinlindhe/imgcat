@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/martinlindhe/imgcat/lib"
-	"gopkg.in/alecthomas/kingpin.v2"
+	"github.com/alecthomas/kingpin/v2"
+	imgcat "github.com/martinlindhe/imgcat/lib"
 )
 
 type fileList []string
