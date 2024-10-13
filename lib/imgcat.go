@@ -42,7 +42,15 @@ func CatFile(fileName string, w io.Writer) error {
 
 func embed(r io.Reader, w io.Writer) error {
 
-	inScreen := os.Getenv("TERM") == "screen"
+	var inScreen bool
+	switch os.Getenv("TERM") {
+	case
+		"screen",
+		"tmux-256color":
+		inScreen = true
+	default:
+		inScreen = false
+	}
 
 	buf := new(bytes.Buffer)
 	_, err := buf.ReadFrom(r)
