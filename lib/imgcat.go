@@ -46,6 +46,7 @@ func embed(r io.Reader, w io.Writer) error {
 	switch os.Getenv("TERM") {
 	case
 		"screen",
+		"tmux",
 		"tmux-256color":
 		inScreen = true
 	default:
